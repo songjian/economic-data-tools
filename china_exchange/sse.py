@@ -1,26 +1,17 @@
-from curses import has_key
 import pandas as pd
-from datetime import datetime
 import requests
 import time
 import math
-# from sqlalchemy import create_engine
 import random
 import io
 import json
 import re
+import sys
 
 headers = {'X-Requested-With': 'XMLHttpRequest',
            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) ' 'Chrome/56.0.2924.87 Safari/537.36',
            'Referer': 'http://www.sse.com.cn/assortment/stock/list/share/'
            }
-
-__all__ = ['update_stocks']
-
-# SQLITE_PATH = '/home/sj/workspace/workspace_python/金融/抓取股票数据/stock.sqlite'
-
-# engine = create_engine('sqlite:///' + SQLITE_PATH)
-# conn = engine.connect()
 
 STOCK_TYPES = {
     1: '主板A股',
@@ -96,40 +87,15 @@ def call_download_stock_list_file(stock_type):
         'stockType': stock_type
     }
     r = requests.post(url, data=data, headers=headers)
+    print(r.text)
     df = pd.read_table(io.StringIO(r.text))
     return pd.read_table(io.StringIO(r.text))
-
-
-def update_stocks():
-    dfs = pd.DataFrame()
-    for type_id, type_name in STOCK_TYPES.items():
-        df = call_download_stock_list_file(type_id)
-        df['板块'] = type_name
-        dfs = dfs.append(df, ignore_index=True)
-    dfs = __regular_stocks(dfs)
-    dfs.to_sql('stock_list', engine, chunksize=1000,
-               if_exists='replace', index=False)
-
-
-def allstocks():
-    return pd.read_sql_table('stock_list', conn)
-
 
 def loads_jsonp(_jsonp):
     try:
         return json.loads(re.match(".*?({.*}).*", _jsonp, re.S).group(1))
     except:
         raise ValueError('Invalid Input')
-
-
-def call_common_query(data):
-    url = 'http://query.sse.com.cn/commonQuery.do'
-    data['jsonCallBack'] = 'jsonpCallback' + \
-        str(math.floor(1e5 * random.random()))
-    data['_'] = str(int(round(time.time() * 1000)))
-
-    r = requests.post(url, data=data, headers=headers)
-    return loads_jsonp(r.text)
 
 def common_query(**data):
     url='http://query.sse.com.cn/commonQuery.do'
@@ -139,9 +105,12 @@ def common_query(**data):
     r=requests.get(url, params=data, headers=headers)
     return loads_jsonp(r.text)
 
+def security_list(**data):
+    url='http://query.sse.com.cn/security/stock/downloadStockListFile.do?csrcCode=&stockCode=&areaName='
+    r=requests.get(url,params=data,headers=headers)
+    return r.text
+
 # 得到分红
-
-
 def get_dividends(year):
     data = {
         'isPagination': 'false',
@@ -153,40 +122,18 @@ def get_dividends(year):
     return result['result']
     # return pd.DataFrame(result['result'])
 
-# 更新分红数据
-
-
-def update_dividends():
-    df = pd.DataFrame()
-    for year in range(1989, datetime.now().year + 1):
-        df = df.append(get_dividends(year), ignore_index=True)
-    df.to_sql('dividends', engine, if_exists='replace')
-
 # 得到送股
-
-
 def get_bonus(year):
     data = {
         'isPagination': 'false',
-        'sqlId': 'COMMON_SSE_GP_SJTJ_FHSG_SG_L_NEW',
+        'sqlId': '',
         'year1': year,
         'year2': year,
     }
     result = call_common_query(data)
     return pd.DataFrame(result['result'])
 
-# 更新送股数据
-
-
-def update_bonus():
-    df = pd.DataFrame()
-    for year in range(1989, datetime.now().year + 1):
-        df = df.append(get_bonus(year), ignore_index=True)
-    df.to_sql('bonus', engine, if_exists='replace')
-
 # 得到配股
-
-
 def get_allotments(year):
     data = {
         'isPagination': 'false',
@@ -196,16 +143,24 @@ def get_allotments(year):
     result = call_common_query(data)
     return pd.DataFrame(result['result'])
 
-# 更新配股数据
-
-
-def update_allotments():
-    df = pd.DataFrame()
-    for year in range(1989, datetime.now().year + 1):
-        df = df.append(get_allotments(year), ignore_index=True)
-    df.to_sql('allotments', engine, if_exists='replace')
-
+def overview(SEARCH_DATE='', PRODUCT_CODE='01,02,03,11,17'):
+    r=common_query(
+        sqlId='COMMON_SSE_SJ_GPSJ_CJGK_MRGK_C',
+        isPagination='false',
+        PRODUCT_CODE=PRODUCT_CODE,
+        type='inParams',
+        SEARCH_DATE=SEARCH_DATE
+        )
+    for i in r['result']:
+        print(i['PRODUCT_CODE'], i['TRADE_DATE'], i['LIST_NUM'], i['TOTAL_VALUE'], \
+            i['NEGO_VALUE'], i['TRADE_AMT'], i['TRADE_VOL'], i['AVG_PE_RATE'], \
+                i['TOTAL_TO_RATE'], i['NEGO_TO_RATE'])
 
 if __name__ == '__main__':
-    print(common_query(sqlId='COMMON_SSE_GP_SJTJ_FHSG_AGFH_L_NEW', record_date_a=2021, security_code_a='',isPagination='false'))
-    # print(get_dividends(1989))
+    # 得到分红
+    # print(common_query(sqlId='COMMON_SSE_GP_SJTJ_FHSG_AGFH_L_NEW', record_date_a=2021, security_code_a='', isPagination='false'))
+    # 得到送股
+    # print(common_query(sqlId='COMMON_SSE_GP_SJTJ_FHSG_SG_L_NEW', isPagination='false', year1=2021, year2=2021))
+    # overview(sys.argv[1], sys.argv[2])
+    # call_download_stock_list_file(1)
+    print(security_list(stockType=1))
