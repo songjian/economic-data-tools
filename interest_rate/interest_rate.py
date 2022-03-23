@@ -1,10 +1,5 @@
-import numpy as np
 import pandas as pd
 import requests
-
-__all__ = ['update_interest_rate']
-
-FILE_PATH = '~/quant/jupyter-data-dir/金融/抓取股票数据/data/ccb/interest_rate.csv'
 
 DATES = {
     '2015-10-24': '20151024_1445618390',
@@ -43,7 +38,7 @@ DATES = {
 #     '1955-10-01': '20090730_1248921591', 
 }
 
-def __get_ccb_interest_rate(fdate):
+def ccb_interest_rate(fdate):
     url = 'http://www.ccb.com/cn/personal/interestv3/' + fdate + '.html'
     data = {}
     headers = {
@@ -57,19 +52,6 @@ def __get_ccb_interest_rate(fdate):
     df = df.iloc[5:11]
     df.set_index(0, inplace=True)
     return df[1]
-    """
-def update_interest_rate():
-    df = pd.DataFrame()
-    for date,fdate in DATES.items():
-        df[date] = get_ccb_interest_rate(fdate)
-    df.T.to_csv(FILE_PATH)
-    
-def __interest_rate():
-    return pd.read_csv(FILE_PATH, index_col=0, parse_dates=[0]).sort_index()
 
-def three_month():
-    return __interest_rate()['三个月']
-"""
 if __name__ == '__main__':
-    print(__get_ccb_interest_rate('20090730_1248921482'))
-#     update_interest_rate()
+    print(ccb_interest_rate('20090730_1248921482'))
