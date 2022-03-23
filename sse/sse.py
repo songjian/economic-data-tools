@@ -156,6 +156,14 @@ def overview(SEARCH_DATE='', PRODUCT_CODE='01,02,03,11,17'):
             i['NEGO_VALUE'], i['TRADE_AMT'], i['TRADE_VOL'], i['AVG_PE_RATE'], \
                 i['TOTAL_TO_RATE'], i['NEGO_TO_RATE'])
 
+def profile(code):
+    r=common_query(
+        sqlId='COMMON_SSE_ZQPZ_GP_GPLB_C',
+        isPagination='false',
+        productid=str(code)
+    )
+    print(r['result'][0])
+
 if __name__ == '__main__':
     # 得到分红
     # print(common_query(sqlId='COMMON_SSE_GP_SJTJ_FHSG_AGFH_L_NEW', record_date_a=2021, security_code_a='', isPagination='false'))
@@ -163,4 +171,5 @@ if __name__ == '__main__':
     # print(common_query(sqlId='COMMON_SSE_GP_SJTJ_FHSG_SG_L_NEW', isPagination='false', year1=2021, year2=2021))
     # overview(sys.argv[1], sys.argv[2])
     # call_download_stock_list_file(1)
-    print(security_list(stockType=1))
+    # print(security_list(stockType=1))
+    profile('605500')
