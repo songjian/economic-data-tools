@@ -5,6 +5,9 @@ economic_data_tools.egg-info/SOURCES.txt
 economic_data_tools.egg-info/dependency_links.txt
 economic_data_tools.egg-info/requires.txt
 economic_data_tools.egg-info/top_level.txt
+interest_rate/__init__.py
+interest_rate/__main__.py
+interest_rate/interest_rate.py
 netease/__init__.py
 netease/__main__.py
 netease/netease.py

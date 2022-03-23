@@ -18,6 +18,9 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",           # 根据MIT许可证开源
         "Operating System :: OS Independent",               # 与操作系统无关
     ],
-    install_requires=['requests==2.27.1'],  # 依赖的包
+    install_requires=[
+        'requests==2.27.1',
+        'pandas==1.3.5',
+        ],  # 依赖的包
     python_requires='>=3'
 )
