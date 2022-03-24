@@ -1,5 +1,11 @@
 # 经济数据工具
 
+## 数据源
+
+* 上海证券交易所(http://www.sse.com.cn/)
+* 深证证券交易所(http://www.szse.cn/)
+* 中国外汇交易中心(https://www.chinamoney.com.cn/)
+
 ## 使用方法
 
 ### 例1：获取LPR利率
