@@ -106,6 +106,21 @@ def common_query(**data):
     return loads_jsonp(r.text)
 
 def security_list(**data):
+    """返回证券列表
+
+    Args:
+        stockType (Any):  1: '主板A股', 2: '主板B股', 8: '科创板'
+
+    >>> security_list(stockType=1)
+    601949    中国出版        601949          中国出版        2017-08-21
+    601952    苏垦农发        601952          苏垦农发        2017-05-15
+    601956    东贝集团        601956          东贝集团        2020-12-25
+    601958    金钼股份        601958          金钼股份        2008-04-17
+    601963    重庆银行        601963          重庆银行        2021-02-05
+    601965    中国汽研        601965          中国汽研        2012-06-11
+    }
+      
+    """
     url='http://query.sse.com.cn/security/stock/downloadStockListFile.do?csrcCode=&stockCode=&areaName='
     r=requests.get(url,params=data,headers=headers)
     return r.text
@@ -144,6 +159,15 @@ def get_allotments(year):
     return pd.DataFrame(result['result'])
 
 def overview(SEARCH_DATE='', PRODUCT_CODE='01,02,03,11,17'):
+    r"""返回沪市成交概况
+
+    >>> overview('20220323')
+    '01 20220323 1663 420949.77 379170.91 3687.92 341.21 15.06 0.8761 0.9726
+02 20220323 46 791.31 668.08 0.98 0.23 13.07 0.1235 0.1463
+03 20220323 402 49116.16 19574.31 377.0 9.03 59.27 0.7676 1.926
+11 20220323 0 0.0 0.0 2.49 0.24 - 0.0 0.0
+17 20220323 2111 470857.23 399413.3 4065.9 350.47 16.23 0.8635 1.018'
+    """
     r=common_query(
         sqlId='COMMON_SSE_SJ_GPSJ_CJGK_MRGK_C',
         isPagination='false',
@@ -157,6 +181,11 @@ def overview(SEARCH_DATE='', PRODUCT_CODE='01,02,03,11,17'):
                 i['TOTAL_TO_RATE'], i['NEGO_TO_RATE'])
 
 def profile(code):
+    """返回股票基础资料
+
+    >>> profile('605500')
+    {'STATE_CODE_B_DESC': '-', 'COMPANY_ABBR': '森林包装', 'SCU_TYPE': '-', 'AREA_NAME_DESC': '浙江', 'OPERATION_SEQ': 'bc5b6660ff5cb1322604304888bcbcff', 'COMPANY_ADDRESS': '浙江省温岭市大溪镇大洋城工业区', 'LEGAL_REPRESENTATIVE': '林启军                        ', 'ISHLT': '-', 'SECURITY_CODE_A_SZ': '-', 'SECURITY_CODE_A': '605500', 'ENGLISH_ABBR': 'Forest', 'SECURITY_CODE_B': '-', 'IF_VOTE_DIFFERENCE': '-', 'STATE_CODE_A_DESC': '上市', 'SMALL_CLASS_NAME': '-', 'STATUS': 'D  F  N', 'IF_PROFIT': '-', 'OTHER_CODE': '-', 'SSE_CODE_DESC': '工业', 'COMPANY_CODE': '605500', 'OFFICE_ZIP': '317525', 'QIANYI_DATE': '2021-01-05 17:48:00', 'SECURITY_30_DESC': '-', 'FULLNAME': '森林包装集团股份有限公司', 'E_MAIL_ADDRESS': 'forestpackaging@126.com', 'TYPE': '0', 'CSRC_GREAT_CODE_DESC': '造纸和纸制品业', 'FOREIGN_LISTING_ADDRESS': '-', 'FOREIGN_LISTING_DESC': '-', 'CHANGEABLE_BOND_CODE': '-', 'OTHER_ABBR': '-', 'FULL_NAME_IN_ENGLISH': 'Forest Packaging Group Co., Ltd.', 'CSRC_MIDDLE_CODE_DESC': '-', 'SEC_NAME_FULL': '森林包装', 'WWW_ADDRESS': 'www.forestpacking.com ', 'SECURITY_ABBR_A': '森林包装', 'CSRC_CODE_DESC': '制造业', 'CHANGEABLE_BOND_ABBR': '-', 'OFFICE_ADDRESS': '浙江省温岭市大溪镇大洋城工业区', 'REPR_PHONE': '-'}
+    """
     r=common_query(
         sqlId='COMMON_SSE_ZQPZ_GP_GPLB_C',
         isPagination='false',
