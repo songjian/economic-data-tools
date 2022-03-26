@@ -41,12 +41,13 @@ def bond(BOND_TYPE, BOND_CODE=''):
 def kzhgszq(BOND_CODE):
     """可转换公司债券
     """
-    print(bond('可转换公司债券', BOND_CODE))
+    # print(bond('可转换公司债券', BOND_CODE)['result'][0])
+    ret=bond('可转换公司债券', BOND_CODE)
+    for r in ret['result']:
+        print(r['BOND_CODE'], r['BOND_ABBR'], r['TERM_YEAR'], r['ISSUE_VALUE'], r['START_DATE'], r['END_DATE'])
 
 if __name__ == '__main__':
     parser=argparse.ArgumentParser()
-    # parser.add_argument("bond_type", help="债券类型 可转换公司债券", nargs='?', default='1')
-    # parser.add_argument("bond_code", help="债券代码", nargs='?', default='')
     parser.add_argument('code', help='债券代码', nargs='?', default='')
     args=parser.parse_args()
     kzhgszq(args.code)
