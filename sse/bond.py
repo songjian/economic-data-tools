@@ -38,9 +38,15 @@ def bond(BOND_TYPE, BOND_CODE=''):
     )
     return r
 
+def kzhgszq(BOND_CODE):
+    """可转换公司债券
+    """
+    print(bond('可转换公司债券', BOND_CODE))
+
 if __name__ == '__main__':
     parser=argparse.ArgumentParser()
-    parser.add_argument("bond_type", help="债券类型 可转换公司债券", nargs='?', default='1')
-    parser.add_argument("bond_code", help="债券代码", nargs='?', default='')
+    # parser.add_argument("bond_type", help="债券类型 可转换公司债券", nargs='?', default='1')
+    # parser.add_argument("bond_code", help="债券代码", nargs='?', default='')
+    parser.add_argument('code', help='债券代码', nargs='?', default='')
     args=parser.parse_args()
-    print(bond(args.bond_type, args.bond_code))
+    kzhgszq(args.code)
