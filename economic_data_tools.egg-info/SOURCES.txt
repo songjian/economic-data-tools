@@ -14,6 +14,9 @@ interest_rate/interest_rate.py
 netease/__init__.py
 netease/__main__.py
 netease/netease.py
+sina_finance/__init__.py
+sina_finance/__main__.py
+sina_finance/sina.py
 sse/__init__.py
 sse/__main__.py
 sse/bond.py

@@ -17,11 +17,11 @@ headers = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36 Edg/99.0.1150.52',
 }
 
-def go():
+def go(list):
     url = 'https://hq.sinajs.cn/?_='+ str(int(round(time.time() * 1000))) + \
-        '/&list=hf_CL'
+       '/&list=' + list
     r = requests.get(url, headers=headers)
     print(r.text)
 
 if __name__ == '__main__':
-    go()
+    go('hf_CL,hf_OIL')
