@@ -12,7 +12,8 @@
 
 ```bash
 python -m chinamoney
-{'head': {'version': '2.0', 'provider': 'CWAP', 'req_code': '', 'rep_code': '200', 'rep_message': '', 'ts': 1647825322900, 'producer': ''}, 'data': {'showDateEN': '21/03/2022 9:15', 'showDateCN': '2022-03-21 9:15'}, 'records': [{'termCode': '1Y', 'shibor': '3.70', 'shibIdUpDown': '---'}, {'termCode': '5Y', 'shibor': '4.60', 'shibIdUpDown': '---'}]}
+2022-03-21 9:15 1Y 3.70
+2022-03-21 9:15 5Y 4.60
 ```
 
 ### 例2：获取沪市成交金额
