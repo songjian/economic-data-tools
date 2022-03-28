@@ -13,6 +13,51 @@ Classifier: Operating System :: OS Independent
 Requires-Python: >=3
 Description-Content-Type: text/markdown
 
-# 投资分析
+# 经济数据工具
 
+## 数据源
+
+* 上海证券交易所(http://www.sse.com.cn/)
+* 深证证券交易所(http://www.szse.cn/)
+* 中国外汇交易中心(https://www.chinamoney.com.cn/)
+
+## 使用方法
+
+### 例1：获取LPR利率
+
+```bash
+python -m chinamoney
+{'head': {'version': '2.0', 'provider': 'CWAP', 'req_code': '', 'rep_code': '200', 'rep_message': '', 'ts': 1647825322900, 'producer': ''}, 'data': {'showDateEN': '21/03/2022 9:15', 'showDateCN': '2022-03-21 9:15'}, 'records': [{'termCode': '1Y', 'shibor': '3.70', 'shibIdUpDown': '---'}, {'termCode': '5Y', 'shibor': '4.60', 'shibIdUpDown': '---'}]}
+```
+
+### 例2：获取沪市成交金额
+
+```bash
+python -m sse 2022-03-23 01,02,03,11,17
+01 20220323 1663 420949.77 379170.91 3687.92 341.21 15.06 0.8761 0.9726
+02 20220323 46 791.31 668.08 0.98 0.23 13.07 0.1235 0.1463
+03 20220323 402 49116.16 19574.31 377.0 9.03 59.27 0.7676 1.926
+11 20220323 0 0.0 0.0 2.49 0.24 - 0.0 0.0
+17 20220323 2111 470857.23 399413.3 4065.9 350.47 16.23 0.8635 1.018
+```
+
+### 例3：获取深市成交金额
+
+```bash
+python -m szse
+股票 2650 5,383.95 451.70 344,569.50 275,209.90 24,802.89 20,691.35
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主板A股 1486 3,309.74 326.64 223,491.65 189,818.87 19,429.17 16,535.90
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;主板B股 43 0.39 0.09 460.54 458.21 121.28 120.97
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;创业板A股 1121 2,073.82 124.97 120,617.30 84,932.81 5,252.43 4,034.47
+基金 556 142.02 134.51 3,302.35 3,175.28 2,553.36 2,535.76
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ETF 247 130.09 124.68 2,658.84 2,658.84 2,170.19 2,170.19
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LOF 303 10.32 9.52 443.48 443.48 356.46 356.46
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;封闭式基金 1 0.01 0.00 18.75 18.75 0.19 0.19
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;基础设施基金 5 1.59 0.30 181.27 54.20 26.51 8.91
+债券 10327 2,297.17 21.52        
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;债券现券 9631 487.02 3.40 515,814.02 22,820.32 5,160.01 225.82
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;债券回购 14 1,802.61 18.03        
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ABS    682 7.53 0.07 5,832.13 5,832.13 63.65 63.65
+期权 160 2.27 0.00
+```
 

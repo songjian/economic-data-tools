@@ -23,13 +23,16 @@ headers = {
     'x-requested-with': 'XMLHttpRequest',
 }
 
-def lpr():
+def _chinamoney(**data):
     url = 'https://www.chinamoney.com.cn/r/cms/www/chinamoney/data/currency/bk-lpr.json'
-    data = {
-        't': str(int(round(time.time() * 1000))),
-    }
+    data['t'] = str(int(round(time.time() * 1000)))
     r = requests.post(url, data=data, headers=headers)
     return json.loads(r.text)
 
+def lpr():
+    r = _chinamoney()
+    print(r['data']['showDateCN'], r['records'][0]['termCode'], r['records'][0]['shibor'])
+    print(r['data']['showDateCN'], r['records'][1]['termCode'], r['records'][1]['shibor'])
+
 if __name__ == '__main__':
-    print(lpr())
+    lpr()
