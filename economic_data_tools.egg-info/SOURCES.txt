@@ -2,7 +2,8 @@ README.md
 setup.py
 chinamoney/__init__.py
 chinamoney/__main__.py
-chinamoney/chinamoney.py
+chinamoney/fx.py
+chinamoney/lpr.py
 economic_data_tools.egg-info/PKG-INFO
 economic_data_tools.egg-info/SOURCES.txt
 economic_data_tools.egg-info/dependency_links.txt
