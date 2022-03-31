@@ -22,6 +22,3 @@ def go(hf_code):
        '/&list=' + hf_code
     r = requests.get(url, headers=headers)
     print(r.text)
-
-if __name__ == '__main__':
-    go('hf_CL,hf_OIL,hf_XAU')
