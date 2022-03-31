@@ -18,7 +18,20 @@ headers = {
 }
 
 def go(hf_code):
-    url = 'https://hq.sinajs.cn/?_='+ str(int(round(time.time() * 1000))) + \
-       '/&list=' + hf_code
+    url = 'https://hq.sinajs.cn/?_=' + str(int(round(time.time() * 1000))) + \
+        '/&list=' + hf_code
+    r = requests.get(url, headers=headers)
+    print(r.text)
+
+
+def zcfzb(code):
+    headers['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+    headers['Accept-Encoding'] = 'gzip, deflate'
+    headers['Cache-Control'] = 'max-age=0'
+    headers['Host'] = 'vip.stock.finance.sina.com.cn'
+    headers['If-Modified-Since'] = 'Thu, 31 Mar 2022 08:06:16 GMT'
+    headers['Upgrade-Insecure-Requests'] = '1'
+    url = 'http://vip.stock.finance.sina.com.cn/corp/go.php/vFD_BalanceSheet/stockid/' + \
+        code+'/ctrl/part/displaytype/4.phtml'
     r = requests.get(url, headers=headers)
     print(r.text)
