@@ -29,7 +29,3 @@ def zycwzb(code):
     }
     r = requests.post(url, data=data, headers=headers)
     return r.text
-
-if __name__ == '__main__':
-    print(zycwzb('601318'))
-    # print(historical_prices('0601318', '20200323', '20200323'))
