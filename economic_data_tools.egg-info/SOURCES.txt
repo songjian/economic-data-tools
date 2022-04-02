@@ -9,9 +9,6 @@ economic_data_tools.egg-info/SOURCES.txt
 economic_data_tools.egg-info/dependency_links.txt
 economic_data_tools.egg-info/requires.txt
 economic_data_tools.egg-info/top_level.txt
-gpfx/__init__.py
-gpfx/__main__.py
-gpfx/gpfx.py
 interest_rate/__init__.py
 interest_rate/__main__.py
 interest_rate/interest_rate.py

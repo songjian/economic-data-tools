@@ -1,5 +1,4 @@
 chinamoney
-gpfx
 interest_rate
 netease
 sina_finance
