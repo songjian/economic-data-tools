@@ -5,6 +5,8 @@
 * 上海证券交易所(http://www.sse.com.cn/)
 * 深证证券交易所(http://www.szse.cn/)
 * 中国外汇交易中心(https://www.chinamoney.com.cn/)
+* 新浪财经[https://finance.sina.com.cn/](https://finance.sina.com.cn/)
+* 网易财经[https://money.163.com/](https://money.163.com/)
 
 ## 使用方法
 
