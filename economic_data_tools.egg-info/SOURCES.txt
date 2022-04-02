@@ -25,3 +25,6 @@ sse/stock.py
 szse/__init__.py
 szse/__main__.py
 szse/szse.py
+wallstreetcn/__init__.py
+wallstreetcn/__main__.py
+wallstreetcn/real.py

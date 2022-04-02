@@ -4,3 +4,4 @@ netease
 sina_finance
 sse
 szse
+wallstreetcn

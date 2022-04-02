@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: economic-data-tools
-Version: 0.0.1
+Version: 0.0.2
 Summary: 经济数据工具
 Home-page: https://github.com/songjian/economic-data-tools
 Author: sj
@@ -22,6 +22,7 @@ Description-Content-Type: text/markdown
 * 中国外汇交易中心(https://www.chinamoney.com.cn/)
 * 新浪财经(https://finance.sina.com.cn/)
 * 网易财经(https://money.163.com/)
+* 华尔街见闻(https://wallstreetcn.com/)
 
 ## 使用方法
 
@@ -157,4 +158,11 @@ $ python -m sina_finance 601318 --zcfzb --year 2020
 负债及股东权益总计 952,787,000.00 913,831,800.00 884,863,100.00 866,295,200.00 
 ```
 
+### 例7：从华尔街见闻获得世界主要国家国债收益率
+
+```bash
+$ python -m wallstreetcn
+CN10YR CN10YR.OTC 中国10年期国债收益率 CN10YR 2.817 3 2.817 2.854 2.806 3.246 2.674 1648799746 2.823 0.006 0.23 forexdata ENDTR 0
+US10YR US10YR.OTC 美国10年期国债收益率 US10YR 2.325 3 2.325 2.456 2.352 2.555 1.138 1648846795 2.386 0.061 2.62 forexdata ENDTR 0
+```
 
