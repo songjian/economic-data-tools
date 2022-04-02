@@ -68,3 +68,9 @@ $ python -m netease --code 0601318 --start 20220331 --end 20220331
 ```bash
 $ python -m sina_finance --zcfzb 601318
 ```
+
+指定资产负债表年份
+
+```bash
+$ python -m sina_finance --zcfzb 601318 --year 2020
+```
