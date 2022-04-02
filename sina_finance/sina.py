@@ -1,5 +1,6 @@
 import time
 import requests
+from bs4 import BeautifulSoup
 
 headers = {
     'Accept': '*/*',
@@ -23,8 +24,9 @@ def go(hf_code):
     r = requests.get(url, headers=headers)
     print(r.text)
 
-
-def zcfzb(code):
+def zcfzb(code, year='part'):
+    """资产负债表
+    """
     headers['Accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
     headers['Accept-Encoding'] = 'gzip, deflate'
     headers['Cache-Control'] = 'max-age=0'
@@ -32,6 +34,13 @@ def zcfzb(code):
     headers['If-Modified-Since'] = 'Thu, 31 Mar 2022 08:06:16 GMT'
     headers['Upgrade-Insecure-Requests'] = '1'
     url = 'http://vip.stock.finance.sina.com.cn/corp/go.php/vFD_BalanceSheet/stockid/' + \
-        code+'/ctrl/part/displaytype/4.phtml'
+        code+'/ctrl/'+year+'/displaytype/4.phtml'
     r = requests.get(url, headers=headers)
-    print(r.text)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    col_len = len(soup.tbody.tr.find_all('td'))
+    for tr in soup.tbody.find_all('tr'):
+        td = tr.find_all('td')
+        if col_len == len(td):
+            for t in td:
+                print(t.text, end=' ')
+            print()
