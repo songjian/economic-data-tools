@@ -66,13 +66,13 @@ $ python -m netease --code 0601318 --start 20220331 --end 20220331
 ### 例6：新浪财经获取资产负债表
 
 ```bash
-$ python -m sina_finance --zcfzb 601318
+$ python -m sina_finance 601318 --zcfzb
 ```
 
 指定资产负债表年份
 
 ```bash
-$ python -m sina_finance --zcfzb 601318 --year 2020
+$ python -m sina_finance 601318 --zcfzb --year 2020
 报表日期 2020-12-31 2020-09-30 2020-06-30 2020-03-31 
 货币资金 52,630,100.00 50,849,700.00 47,383,200.00 51,504,800.00 
 拆出资金 7,099,600.00 9,879,700.00 8,381,800.00 4,955,100.00 
