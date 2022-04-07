@@ -34,23 +34,15 @@ def _js(**data):
         '_' + str(int(round(time.time() * 1000)))
     data['_'] = str(int(round(time.time() * 1000)))
     data['type'] = 'GJZB'
-    data['sty'] = 'HKZB' if data['stat'] else 'ZGZB'
     data['js'] = '([(x)])'
     data['p'] = '1'
     data['ps'] = '200'
-    # if not 'mkt' in data.keys():
-    #     data['mkt'] = '0'
-    # if not 'stat' in data.keys():
-    #     data['stat'] = '4'
     r = requests.get(url, params=data, headers=headers)
     return _loads_jsonp(r.text)
 
-#     type: GJZB
-# sty: ZGZB
-
-def em(*, stat=0, mkt=0):
-    data=_js(stat=stat, mkt=mkt)
+def hg(*, stat=None, mkt=None, sty='HKZB'):
+    """宏观数据
+    """
+    data=_js(stat=stat, mkt=mkt, sty=sty)
     for i in data:
         print(i)
-
-em(mkt='19')
