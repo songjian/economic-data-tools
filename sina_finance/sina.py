@@ -1,6 +1,8 @@
 import time
 import requests
 from bs4 import BeautifulSoup
+import io
+import pandas as pd
 
 headers = {
     'Accept': '*/*',
@@ -15,7 +17,7 @@ headers = {
     'Sec-Fetch-Dest': 'script',
     'Sec-Fetch-Mode': 'no-cors',
     'Sec-Fetch-Site': 'cross-site',
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.74 Safari/537.36 Edg/99.0.1150.52',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36 Edg/103.0.1264.71',
 }
 
 def go(hf_code):
@@ -44,3 +46,25 @@ def zcfzb(code, year='part'):
             for t in td:
                 print(t.text, end=' ')
             print()
+
+def cwzy(code):
+    """财务摘要
+    写这个方法主要是为了拿到每股净资产，写到一般发现有更好的方法或者这个数据。新的方法是 mgjzc
+    """
+    url='https://vip.stock.finance.sina.com.cn/corp/go.php/vFD_FinanceSummary/stockid/'+code+'.phtml'
+    r=requests.get(url)
+    soup=BeautifulSoup(r.text, 'html.parser')
+    return soup.find('table', id='FundHoldSharesTable').find_all('td', class_='tdr')
+
+def mgjzc(code):
+    """每股净资产
+    """
+    url='https://vip.stock.finance.sina.com.cn/corp/view/vFD_FinanceSummaryHistory.php?stockid='+code+'&type=mgjzc'
+    r=requests.get(url)
+    soup=BeautifulSoup(r.text, 'html.parser')
+    csv_buffer=io.StringIO()
+    for tr in soup.find('table', id='Table1').tbody.find_all('tr'):
+        td = tr.find_all('td')
+        csv_buffer.write(td[0].get_text()+','+td[1].get_text()+"\n")
+    csv_buffer.seek(0)
+    return pd.read_csv(csv_buffer)
