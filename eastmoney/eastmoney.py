@@ -49,7 +49,11 @@ def hg(*, stat=None, mkt=None, sty='HKZB'):
         print(i)
 
 def f10(**data):
-    """股票F10"""
+    """股票F10
+
+    Keyword arguments:
+    code -- 股票代码，例如: SH603288
+    """
     headers = {
         'Host': 'emweb.securities.eastmoney.com',
         'User-Agent': 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/110.0',
@@ -64,6 +68,6 @@ def f10(**data):
         'Cache-Control': 'no-cache',
     }
 
-    url='http://emweb.securities.eastmoney.com/PC_HSF10/ShareholderResearch/PageAjax?code=SH603288'
+    url='http://emweb.securities.eastmoney.com/PC_HSF10/ShareholderResearch/PageAjax'
     r=requests.get(url, params=data, headers=headers)
     return json.loads(r.text)
