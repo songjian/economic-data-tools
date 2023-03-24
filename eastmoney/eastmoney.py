@@ -41,7 +41,7 @@ class Eastmoney:
         data['p'] = '1'
         data['ps'] = '200'
         r = requests.get(url, params=data, headers=headers)
-        return _loads_jsonp(r.text)
+        return self._loads_jsonp(r.text)
 
     def hg(self, *, stat=None, mkt=None, sty='HKZB'):
         """宏观数据
