@@ -50,12 +50,17 @@ class Eastmoney:
         for i in data:
             print(i)
 
-    def f10(self, **data):
-        """股票F10
+
+class F10:
+    def shareholder_research(self, **data) -> dict:
+        """股东研究
 
         Keyword arguments:
         code -- 股票代码，例如: SH603288
         date -- 日期，例如: 2022-03-31
+
+        Returns:
+        sjkzr -- 实际控制人
         """
         headers = {
             'Host': 'emweb.securities.eastmoney.com',
