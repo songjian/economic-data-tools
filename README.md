@@ -142,3 +142,11 @@ $ python -m wallstreetcn
 CN10YR CN10YR.OTC 中国10年期国债收益率 CN10YR 2.817 3 2.817 2.854 2.806 3.246 2.674 1648799746 2.823 0.006 0.23 forexdata ENDTR 0
 US10YR US10YR.OTC 美国10年期国债收益率 US10YR 2.325 3 2.325 2.456 2.352 2.555 1.138 1648846795 2.386 0.061 2.62 forexdata ENDTR 0
 ```
+
+### 例8：从Eastmoney获得实际控制人
+
+```python
+from eastmoney.eastmoney import F10
+a = F10()
+a.shareholder_research(code="SH600161", "2022-03-31")
+```
