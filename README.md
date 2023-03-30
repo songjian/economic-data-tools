@@ -148,5 +148,6 @@ US10YR US10YR.OTC 美国10年期国债收益率 US10YR 2.325 3 2.325 2.456 2.352
 ```python
 from eastmoney.eastmoney import F10
 a = F10()
-a.shareholder_research(code="SH600161", "2022-03-31")
+b=a.shareholder_research(code="SH600161", "2022-03-31")
+b['sjkzr'][0]['HOLDER_NAME']
 ```
