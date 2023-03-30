@@ -61,6 +61,12 @@ class F10:
 
         Returns:
         sjkzr -- 实际控制人
+        jjcg -- 基金持股
+        jgcc_date -- 机构持仓
+        sdgd_date -- 十大股东
+        sdltgd_date -- 十大流通股东
+        gdrs -- 股东人数
+        sdgdcgbd -- 十大股东持股变动
         """
         headers = {
             'Host': 'emweb.securities.eastmoney.com',
