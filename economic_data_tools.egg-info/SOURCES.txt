@@ -1,9 +1,5 @@
 README.md
 setup.py
-chinamoney/__init__.py
-chinamoney/__main__.py
-chinamoney/fx.py
-chinamoney/lpr.py
 eastmoney/__init__.py
 eastmoney/__main__.py
 eastmoney/eastmoney.py
@@ -15,12 +11,11 @@ economic_data_tools.egg-info/top_level.txt
 interest_rate/__init__.py
 interest_rate/__main__.py
 interest_rate/interest_rate.py
+investing/__init__.py
+investing/investing.py
 netease/__init__.py
 netease/__main__.py
 netease/netease.py
-sina_finance/__init__.py
-sina_finance/__main__.py
-sina_finance/sina.py
 sse/__init__.py
 sse/__main__.py
 sse/bond.py

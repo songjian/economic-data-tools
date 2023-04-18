@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: economic-data-tools
-Version: 0.0.4
+Version: 0.0.5
 Summary: 经济数据工具
 Home-page: https://github.com/songjian/economic-data-tools
 Author: sj
@@ -25,14 +25,6 @@ Description-Content-Type: text/markdown
 * 华尔街见闻(https://wallstreetcn.com/)
 
 ## 使用方法
-
-### 例1：获取LPR利率
-
-```bash
-$ python -m chinamoney
-2022-03-21 9:15 1Y 3.70
-2022-03-21 9:15 5Y 4.60
-```
 
 ### 例2：获取沪市成交金额
 
@@ -165,4 +157,14 @@ $ python -m wallstreetcn
 CN10YR CN10YR.OTC 中国10年期国债收益率 CN10YR 2.817 3 2.817 2.854 2.806 3.246 2.674 1648799746 2.823 0.006 0.23 forexdata ENDTR 0
 US10YR US10YR.OTC 美国10年期国债收益率 US10YR 2.325 3 2.325 2.456 2.352 2.555 1.138 1648846795 2.386 0.061 2.62 forexdata ENDTR 0
 ```
+
+### 例8：从Eastmoney获得实际控制人
+
+```python
+from eastmoney.eastmoney import F10
+a = F10()
+b=a.shareholder_research(code="SH600161", date="2022-03-31")
+b['sjkzr'][0]['HOLDER_NAME']
+```
+
 
