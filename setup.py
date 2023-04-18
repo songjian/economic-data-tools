@@ -7,7 +7,7 @@ setuptools.setup(
     name="economic-data-tools",                                     # 包的分发名称，使用字母、数字、_、-
     version="0.0.5",                                        # 版本号, 版本号规范：https://www.python.org/dev/peps/pep-0440/
     author="sj",                                       # 作者名字
-    author_email="songjian@codeorder.cn",                      # 作者邮箱
+    author_email="root@mail.codeorder.cn",                      # 作者邮箱
     description="经济数据工具",                            # 包的简介描述
     long_description=long_description,                      # 包的详细介绍(一般通过加载README.md)
     long_description_content_type="text/markdown",          # 和上条命令配合使用，声明加载的是markdown文件
